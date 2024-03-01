@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ticket', function (Blueprint $table) {
-            $table->bigIncrements('ticket_id');
-            $table->unsignedBigInteger('event_id');
+            $table->uuid('ticket_id')->primary();
+            $table->uuid('event_id');
             $table->string('ticket_type', 50);
             $table->integer('ticket_price');
+            $table->integer('number');
+
             $table->timestamps();
             
             // Define event_id as a foreign key referencing the id column of the events table
-            $table->foreign('event_id')->references('event_id')->on('events');
+            $table->foreign('event_id')->references('id')->on('events');
         });
     }
 

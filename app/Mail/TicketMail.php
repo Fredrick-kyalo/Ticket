@@ -13,13 +13,12 @@ class TicketMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $data =[];
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
+
 
     /**
      * Get the message envelope.
@@ -27,18 +26,20 @@ class TicketMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ticket Mail',
+            subject: 'Your Tickets Are Here,'
         );
     }
 
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    public function build()
     {
-        return new Content(
-            view: 'view.name',
-        );
+        return $this->subject('Your Tickets Are Here')
+                    ->view('tickets') // view file for the email
+                    ->with([
+                        'data' => $this->data // data you want to send with the email
+                    ]);
     }
 
     /**

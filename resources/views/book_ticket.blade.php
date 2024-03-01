@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Agency - Start Bootstrap Theme</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
-    </head>
-    <body id="page-top">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Agency - Start Bootstrap Theme</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+    <style>
+        /* Custom CSS for form */
+        .form-container {
+            background-color: #ffc107; /* Yellow background */
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
@@ -58,28 +66,54 @@
                 </div>
             </div>
 
-<form action="{{ route('reservation.store') }}" method="post">
+            <section class="page-section" id="reservation">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="form-container">
+                        <h2 class="section-heading text-uppercase text-center mb-4">Reserve Ticket</h2>
+                        <form action="{{ route('reservation.store') }}" method="post">
     @csrf
     <input type="hidden" name="event_id" value="{{ $event->id }}">
-    <div>
-        <label for="event_name">Event Name:</label>
-        <input type="text" id="event_name" value="{{ $event->name }}" readonly>
+    <div class="mb-3">
+        <label for="event_name" class="form-label">Event Name:</label>
+        <input type="text" id="event_name" class="form-control" value="{{ $event->Event_name }}" readonly>
+        
     </div>
-    <div>
-        <label for="event_date">Event Date:</label>
-        <input type="text" id="event_date" value="{{ $event->date }}" readonly>
+    <div class="mb-3">
+        <label for="event_date" class="form-label">Event Date:</label>
+        <input type="text" id="event_date" class="form-control" value="{{ $event->Event_date }}" readonly>
+        
     </div>
-    <div>
-        <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" required>
+    <div class="mb-3">
+        <label for="email" class="form-label">Your Email:</label>
+        <input type="email" id="email" name="email" class="form-control" required>
     </div>
-    <div>
-        <label for="no_of_tickets">Number of Tickets:</label>
-        <input type="number" id="no_of_tickets" name="no_of_tickets" min="1" max="5" required>
+    <div class="mb-3">
+        <label for="no_of_tickets" class="form-label">Number of Tickets:</label>
+        <input type="number" id="no_of_tickets" name="no_of_tickets" class="form-control" min="1" max="5" required>
     </div>
-    <!-- Add more fields for ticket_id and reservation_date if needed -->
-    <button type="submit">Reserve Ticket</button>
+   
+    
+    <div class="mb-3">
+        <label for="tickets" class="form-label">Tickets:</label>
+        <select id="tickets" name="tickets[]" class="form-control" multiple>
+            @foreach ($event->tickets as $ticket)
+                <option value="{{ $ticket->ticket_id }}">{{ $ticket->ticket_type }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Reserve Ticket</button>
+    </div>
 </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <footer class="footer py-4">
             <div class="container">

@@ -11,10 +11,18 @@ class Ticket extends Model
 
 
     protected $table = 'ticket';
+    public $incrementing = false;
 
     protected $primaryKey = 'ticket_id';
+    protected $fillable = [
+        'event_id',
+        'ticket_type',
+        'ticket_price',
+        'number'
+    ];
+
     public function event()
 {
-    return $this->belongsTo(Event::class, 'Event_id', 'event_id');
+    return $this->belongsTo(Event::class,'event_id');
 }
 }

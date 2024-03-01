@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Ticket;
 
 class DashboardController extends Controller
 {
     // Method to display registered events
     public function registered()
     {
-        $events = Event::all();
+        $events = Event::get();
         return view('admin.register')->with('events', $events);
 
         $events = Event::with('tickets')->get(); // Eager load tickets relationship
@@ -21,27 +22,38 @@ class DashboardController extends Controller
     // Method to store a new event
     public function store(Request $request)
     {
+        try {
+            //code...
+            $validatedData = $request->validate([
+                'Event_name' => 'required',
+                'Event_date' => 'required|date',
+                'Max_attendees' => 'required|integer|min:1',
+                'owner_id' => 'required',
+            ]);
+           // $user = Auth()->user->id;
+            // Create a new event instance
+            $event = Event::create([
+                'Event_name' => $validatedData['Event_name'],
+                'Event_date' => $validatedData['Event_date'],
+                'Max_attendees' => $validatedData['Max_attendees'],
+                'owner_id'=>  $validatedData['owner_id'],
+
+            ]);
+            return response()->json([
+                'Message'=>'Successful',
+                'event'=> $event,
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+               $th->getMessage() 
+            ]);
+        }
         // Validate the incoming request data
-        $validatedData = $request->validate([
-            'Event_name' => 'required',
-            'Event_id' => 'required|unique:events',
-            'Event_date' => 'required|date',
-            'Max_attendees' => 'required|integer|min:1',
-        ]);
-
-        // Create a new event instance
-        $event = Event::create([
-            'Event_name' => $validatedData['Event_name'],
-            'Event_id' => $validatedData['Event_id'],
-            'Event_date' => $validatedData['Event_date'],
-            'Max_attendees' => $validatedData['Max_attendees'],
-
-        ]);
-       
-        $event->save();
-
+        
+    
         // Redirect back or to a success page
-        return redirect()->back()->with('success', 'Event added successfully');
+        //return redirect()->back()->with('success', 'Event added successfully');
     }
 
     public function edit(Request $request ,string $id)
@@ -82,7 +94,25 @@ public function delete(string $id){
     $event->delete();
 
 }
+ 
+public function createTickets(Request $request,string $id)
+{
+    $event = Event::findOrfail($id);
 
+    $validateData = $request->validate([
+        'ticket_type' => 'required',
+        'ticket_price'=> 'required',
+        'number' => 'required',
+    ]);
+
+    $ticket = Ticket::create([
+        'event_id' => $event->id,
+        'ticket_type' => $validateData['ticket_type'],
+        'ticket_price'=>$validateData['ticket_price'],
+        'number'=>$validateData['number'],
+    ]);
     
+
+}
 
 }

@@ -45,4 +45,8 @@ class User extends Authenticatable
      * @var bool
      */
     public $timestamps = false;
+
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
 }

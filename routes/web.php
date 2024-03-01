@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\reservationcontroller;
-use Illuminate\Support\Facades\Route;
+use App\Models\Event;
 use App\Http\Middleware;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\reservationcontroller;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 
@@ -40,19 +41,22 @@ Route::get('/role-register', [DashboardController::class, 'registered']);
 
 
 
-Route::post('/events', [DashboardController::class, 'store'])->name('events.store');
+Route::post('create/event', [DashboardController::class, 'store'])->name('events.store');
 
-Route::post('/events', [DashboardController::class, 'store'])->name('events.store');
+
 Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 
 
+Route::post('create/{id}/tickets', [DashboardController::class, 'createTickets'])->name('create.tickets');
 
    
 
 
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        $events = Event::get();
+        return view('admin.dashboard')->with('events', $events);
+        
     })->name('admin.dashboard');
 
 

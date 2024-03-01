@@ -66,7 +66,7 @@
                     <h5 class="card-title">{{ $event->Event_name }}</h5>
                     <p class="card-text">{{ $event->Event_date }}</p>
                     <p class="card-text">{{ $event->Max_attendees}}</p>
-                    <a href="{{ route('book.ticket', $event->Event_id) }}" class="btn btn-primary">Book Ticket</a>
+                    <a href="{{ route('book.ticket', $event->id) }}" class="btn btn-primary">Book Ticket</a>
                 </div>
             </div>
         </div>
