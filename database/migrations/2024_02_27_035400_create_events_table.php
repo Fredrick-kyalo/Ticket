@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigIncrements('Event_id');
             $table->date('Event_date');
             $table->integer('Max_attendees');
+            $table->string('Image');
             //$table->timestamps();
         });
     }
