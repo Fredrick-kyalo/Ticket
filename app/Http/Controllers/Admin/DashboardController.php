@@ -29,15 +29,27 @@ class DashboardController extends Controller
                 'Event_date' => 'required|date',
                 'Max_attendees' => 'required|integer|min:1',
                 'owner_id' => 'required',
+                'Images'=> 'image|mimes:jpeg,jpg,png,bmp|max:4080'
             ]);
-           // $user = Auth()->user->id;
+        
+            // Check if file is present in the request
+            if ($request->hasFile('Images')) {
+                // Store the file in the public folder
+                $imagePath = $request->file('Images')->store('public');
+                // Get the filename
+                $imageName = basename($imagePath);
+            } else {
+                // If no file is uploaded, set $imageName to null or a default value
+                $imageName = null;
+            }
+        
             // Create a new event instance
             $event = Event::create([
                 'Event_name' => $validatedData['Event_name'],
                 'Event_date' => $validatedData['Event_date'],
                 'Max_attendees' => $validatedData['Max_attendees'],
                 'owner_id'=>  $validatedData['owner_id'],
-
+                'Image' => $imageName // Store the image filename in the database
             ]);
             return response()->json([
                 'Message'=>'Successful',
@@ -45,15 +57,13 @@ class DashboardController extends Controller
             ]);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json([
-               $th->getMessage() 
-            ]);
+            
         }
         // Validate the incoming request data
         
     
         // Redirect back or to a success page
-        //return redirect()->back()->with('success', 'Event added successfully');
+        return redirect()->back()->with('success', 'Event added successfully');
     }
 
     public function edit(Request $request ,string $id)
@@ -111,6 +121,8 @@ public function createTickets(Request $request,string $id)
         'ticket_price'=>$validateData['ticket_price'],
         'number'=>$validateData['number'],
     ]);
+
+    return redirect()->back()->with('success', 'Tickets added successfully');
     
 
 }

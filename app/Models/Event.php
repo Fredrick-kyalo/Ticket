@@ -22,6 +22,7 @@ class Event extends Model
         'Event_date',
         'Max_attendees',
         'owner_id',
+        'Image'
     ];
 
     public function tickets()
