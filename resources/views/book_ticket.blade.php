@@ -75,16 +75,8 @@
                         <form action="{{ route('reservation.store') }}" method="post">
     @csrf
     <input type="hidden" name="event_id" value="{{ $event->id }}">
-    <div class="mb-3">
-        <label for="event_name" class="form-label">Event Name:</label>
-        <input type="text" id="event_name" class="form-control" value="{{ $event->Event_name }}" readonly>
-        
-    </div>
-    <div class="mb-3">
-        <label for="event_date" class="form-label">Event Date:</label>
-        <input type="text" id="event_date" class="form-control" value="{{ $event->Event_date }}" readonly>
-        
-    </div>
+    
+    
     <div class="mb-3">
         <label for="email" class="form-label">Your Email:</label>
         <input type="email" id="email" name="email" class="form-control" required>
