@@ -30,24 +30,36 @@ class DashboardController extends Controller
         ]);
 
         // Create a new event instance
-        $event = new Event();
-        $event->Event_name = $validatedData['Event_name'];
-        $event->Event_id = $validatedData['Event_id'];
-        $event->Event_date = $validatedData['Event_date'];
-        $event->Max_attendees = $validatedData['Max_attendees'];
+        $event = Event::create([
+            'Event_name' => $validatedData['Event_name'],
+            'Event_id' => $validatedData['Event_id'],
+            'Event_date' => $validatedData['Event_date'],
+            'Max_attendees' => $validatedData['Max_attendees'],
 
-        // Save the event
+        ]);
+       
         $event->save();
 
         // Redirect back or to a success page
         return redirect()->back()->with('success', 'Event added successfully');
     }
 
-    public function edit($Event_id)
+    public function edit(Request $request ,string $id)
     {
-        $event = Event::findOrFail($Event_id);
-        $events = Event::all(); // Fetch all events
-        return view('admin.register', ['events' => $events, 'event' => $event]);
+        $event = Event::findOrFail($id);
+        $validateData = $request->validate([
+            'Event_name' =>'sometimes',
+            
+            'Event_date'=>'sometimes',
+            'Max_attendees'=>'sometimes',
+        ]);
+
+        $event->Event_name = $validateData['Event_name'];
+        $event->Event_date = $validateData['Event_date'];
+        $event->Max_attendees = $validateData['Max_attendees'];
+
+        $event->save();
+       
     }
 
     public function index()
@@ -63,6 +75,12 @@ public function bookTicket($id)
 
     // You can then return a view where users can book tickets for this event
     return view('book_ticket', compact('event'));
+}
+public function delete(string $id){
+//delete event 
+    $event = Event::findOrfail($id);
+    $event->delete();
+
 }
 
     
