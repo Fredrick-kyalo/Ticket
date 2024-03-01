@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('Event_name', 50);
             $table->date('Event_date');
             $table->integer('Max_attendees');
+            $table->string('Image');
             $table->unsignedBigInteger('owner_id');
             $table->timestamps();
 
