@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+//TODO SET UP ALL ROUTES AUTH ADMIN FUNCTIONS
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

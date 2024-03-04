@@ -13,6 +13,8 @@ use App\Http\Controllers\reservationcontroller;
 
 
 
+//TODO SETUP VIEWS ROUTES
+//TODO SETUP FETCH API FOR ADMIN DASHBOARD
 
 /*
 |--------------------------------------------------------------------------
