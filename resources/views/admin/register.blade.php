@@ -25,21 +25,17 @@
                             <th>DELETE</th>
                         </thead>
                         <tbody>
-                            @foreach($events as $row)
+                           //foreach($events as $row)
                             <tr>
-                            <td>{{$row->Event_name}}</td>
-        <td>{{$row->Event_id}}</td>
-        <td>{{$row->Event_date}}</td>
-        <td>{{$row->Max_attendees}}</td>
+                            <td>/*$row->Event_name*/</td>
+        <td>Mkurugenzi</td>
+        <td>3/4/2024</td>
+        <td>1000</td>
         <td>
-    @if($row->tickets->isNotEmpty())
-        {{ $row->tickets->first()->ticket_type }}
-    @else
-        No ticket type available
-    @endif
+    
 </td>
                                 <td>
-                                <a href="#" class="btn btn-warning" onclick="toggleEditForm({{ $row->Event_id }})">EDIT</a>
+                                <a href="#" class="btn btn-warning" onclick="toggleEditForm( // $row->Event_id }})">EDIT</a>
 
 
                                 </td>
@@ -52,23 +48,23 @@
                             </tr>
                             <tr>
                                 <td colspan="7">
-                                    <div id="editFormContainer{{$row->Event_id}}" style="display: none;">
-                                        <form id="editEventForm{{$row->Event_id}}">
+                                    <div id="editFormContainer" style="display: none;">
+                                        <form id="editEventForm">
                                             <div class="form-group">
-                                                <label for="editEventName{{$row->Event_id}}">Event Name</label>
-                                                <input type="text" class="form-control" id="editEventName{{$row->Event_id}}" name="editEventName" value="{{$row->Event_name}}">
+                                                <label for="editEventName">Event Name</label>
+                                                <input type="text" class="form-control" id="editEventName" name="editEventName" value="{{$row->Event_name}}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="editEventDate{{$row->id}}">Event Date</label>
-                                                <input type="date" class="form-control" id="editEventDate{{$row->Event_id}}" name="editEventDate" value="{{$row->Event_date}}">
+                                                <label for="editEventDate">Event Date</label>
+                                                <input type="date" class="form-control" id="editEventDate" name="editEventDate" value="{{$row->Event_date}}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="editMaxAttendees{{$row->Event_id}}">Max Attendees</label>
-                                                <input type="number" class="form-control" id="editMaxAttendees{{$row->Event_id}}" name="editMaxAttendees" value="{{$row->Max_attendees}}">
+                                                <label for="editMaxAttendees">Max Attendees</label>
+                                                <input type="number" class="form-control" id="editMaxAttendees" name="editMaxAttendees" value="{{$row->Max_attendees}}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="editTicketType{{$row->Event_id}}">Ticket Type</label>
-                                                <select class="form-control" id="editTicketType{{$row->Event_id}}" name="editTicketType">
+                                                <label for="editTicketType">Ticket Type</label>
+                                                <select class="form-control" id="editTicketType" name="editTicketType">
                                                     <option value="Regular">Regular</option>
                                                     <option value="VIP">VIP</option>
                                                 </select>
@@ -78,7 +74,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
+                            
                         </tbody>
                     </table>
                 </div>
@@ -95,7 +91,7 @@
                 <h4 class="card-title">Add New Event</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('events.store') }}" method="POST">
+                <form action="" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="Event_name">Event Name:</label>

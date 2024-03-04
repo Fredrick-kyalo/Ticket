@@ -1,6 +1,3 @@
-{{-- @php
-dd($events);
-@endphp --}}
 
 
 
@@ -64,20 +61,20 @@ dd($events);
                 </div>
             </div>
             <div class="row">
-    @foreach($events as $event)
+    
         <div class="col-md-4">
             <div class="card mb-4">
-                
-                <img class="card-img-top" src="{{  asset('storage/uploads/' . $event->Image) }}" alt="{{ $event->name }}">
+               
+                <img class="card-img-top" src="{{  asset('storage/uploads/Art.jpg') }}" alt="">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $event->Event_name }}</h5>
-                    <p class="card-text">{{ $event->Event_date }}</p>
-                    <p class="card-text">{{ $event->Max_attendees}}</p>
-                    <a href="{{ route('book.ticket', $event->id) }}" class="btn btn-primary">Book Ticket</a>
+                    <h5 class="card-title"> Mkurugenzi </h5>
+                    <p class="card-text">3/4/25</p>
+                    <p class="card-text">1000</p>
+                    <a href="/" class="btn btn-primary">Book Ticket</a>
                 </div>
             </div>
         </div>
-    @endforeach
+    
 </div>
 
     

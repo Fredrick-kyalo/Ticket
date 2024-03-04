@@ -5,7 +5,6 @@ use App\Http\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
-use App\Http\Controllers\reservationcontroller;
 
 
 
@@ -27,16 +26,18 @@ use App\Http\Controllers\reservationcontroller;
 |
 */
 
+//default page
 Route::get('/', function () {
-    return view('homepage');
-});
+    return view('homepage');})->name('homepage');
 
-Route::get('/register', function () {
-    return view('register'); })->name('register');
+//admin dashboard 
+Route::get('/dashboard', function () {
+    return  view ('admin.dashboard');
+})->name('dashboard');
 
 Route::get('/create/event', function () {
     return  view ('admin.createvent');
-});
+})->name('create.event');
 
 
 
@@ -44,10 +45,10 @@ Route::get('/create/event', function () {
 
 
 
-// Route::post('create/event', [::class, 'store'])->name('events.store');
 
 
-// Route::get('/', [DashboardController::class, 'index'])->name('home');
+
+
 
 
 
