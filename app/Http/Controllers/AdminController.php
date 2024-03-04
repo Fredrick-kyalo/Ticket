@@ -10,12 +10,16 @@ use App\Models\Ticket;
 class DashboardController extends Controller
 {
     // Method to display registered events
-    public function registered()
+    public function events()
     {
         $events = Event::get();
-        return view('admin.register')->with('events', $events);
+        $data = [
+            'events' => $events,
+            'Message' => 'Successful'
+        ];
+        return response()->json($data);
 
-        $events = Event::with('tickets')->get(); // Eager load tickets relationship
+        $events = Event::with('tickets')->get(); 
     return view('admin.register')->with('events', $events);
     }
 
@@ -35,12 +39,13 @@ class DashboardController extends Controller
             // Check if file is present in the request
             if ($request->hasFile('Images')) {
                 // Store the file in the public folder
-                $imagePath = $request->file('Images')->store('public');
+                
+                $image = $request->file('Images')->store('public/uploads');
                 // Get the filename
-                $imageName = basename($imagePath);
+                $imagePath= basename($image);
             } else {
                 // If no file is uploaded, set $imageName to null or a default value
-                $imageName = null;
+                $imagePath = null;
             }
         
             // Create a new event instance
@@ -49,7 +54,7 @@ class DashboardController extends Controller
                 'Event_date' => $validatedData['Event_date'],
                 'Max_attendees' => $validatedData['Max_attendees'],
                 'owner_id'=>  $validatedData['owner_id'],
-                'Image' => $imageName // Store the image filename in the database
+                'Image' => $imagePath // Store the image filename in the database
             ]);
             return response()->json([
                 'Message'=>'Successful',
@@ -57,6 +62,7 @@ class DashboardController extends Controller
             ]);
         } catch (\Throwable $th) {
             //throw $th;
+            return response()->json([$th->getMessage()]);
             
         }
         // Validate the incoming request data
@@ -94,6 +100,7 @@ public function bookTicket($id)
 {
     // You can retrieve the event with the given ID from the database
     $event = Event::findOrFail($id);
+    //dd($event);
 
     // You can then return a view where users can book tickets for this event
     return view('book_ticket', compact('event'));

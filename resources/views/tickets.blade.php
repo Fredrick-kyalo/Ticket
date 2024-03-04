@@ -19,8 +19,8 @@
                         <p>Dear Client,</p>
                         <p><strong>Event Name:</strong> {{ $data['event_name'] }}</p>
                         <p><strong>Ticket Type:</strong> {{$data['ticket_type']}}</p>
-                        <p><strong>Number of Tickets:</strong> {{$data ['no_of_tickets']}}</p>
-                        <p><strong>Email:</strong> {{$data['email']}}</p>
+                        <p><strong>Number of Tickets:</strong> {{$data ['accompany']}}</p>
+                        
                        
                     </div>
                 </div>

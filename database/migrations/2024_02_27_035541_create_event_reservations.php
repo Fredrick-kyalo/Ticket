@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->integer('no_of_tickets');
             $table->date('reservation_date');
+            $table->enum('status',['paid','unpaid'])->default('unpaid');
             $table->timestamps();
             
 

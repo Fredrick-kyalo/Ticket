@@ -1,3 +1,9 @@
+{{-- @php
+dd($events);
+@endphp --}}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,7 +26,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+                <a class="navbar-brand" href="#page-top"><img src="{{  asset('storage/uploads/th.jpeg') }}" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -61,7 +67,8 @@
     @foreach($events as $event)
         <div class="col-md-4">
             <div class="card mb-4">
-                <img class="card-img-top" src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->name }}">
+                
+                <img class="card-img-top" src="{{  asset('storage/uploads/' . $event->Image) }}" alt="{{ $event->name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $event->Event_name }}</h5>
                     <p class="card-text">{{ $event->Event_date }}</p>

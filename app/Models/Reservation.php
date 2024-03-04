@@ -19,6 +19,7 @@ class Reservation extends Model
         'event_id',
         'no_of_tickets',
         'reservation_date',
+        'email'
     ];
 
     protected $dates = [

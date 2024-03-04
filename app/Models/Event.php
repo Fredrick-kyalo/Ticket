@@ -25,7 +25,7 @@ class Event extends Model
         'Image'
     ];
 
-    public function tickets()
+    public function ticket()
     {
         return $this->hasMany(Ticket::class);
     }
