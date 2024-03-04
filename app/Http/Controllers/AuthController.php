@@ -56,13 +56,14 @@ try {
     if (Auth::attempt($credentials)) {
          $user = auth()->user();
          $token = $user->createToken('token')->plainTextToken;
-         if(Auth::user()->role ==1){
+         if(Auth::user()->role ==0){
          
           $roleArray = ['admin'];
          }
-         elseif(Auth::user()->role==0){
+         elseif(Auth::user()->role==1){
            
             $roleArray = ['user'];
+            
          }
          
          else{

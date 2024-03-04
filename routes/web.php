@@ -32,8 +32,7 @@ Route::get('/', function () {
 });
 
 Route::get('/register', function () {
-    return view('register');
-})->name('register');
+    return view('register'); })->name('register');
 
 Route::get('/create/event', function () {
     return  view ('admin.createvent');
@@ -52,7 +51,6 @@ Route::get('/create/event', function () {
 
 
 
-// Route::post('create/{id}/tickets', [DashboardController::class, 'createTickets'])->name('create.tickets');
 
    
 
